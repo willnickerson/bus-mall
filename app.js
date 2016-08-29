@@ -13,6 +13,7 @@ function Item(path){
   items.push(this);
 }
 
+//loads items array with item objects
 function loadItems(){
   for(var i = 0; i < pathArray.length; i++){
     new Item(pathArray[i]);
@@ -21,14 +22,20 @@ function loadItems(){
 
 loadItems();
 
+//generates a random item index
+function randomIndex() {
+  var index = Math.floor(Math.random() * items.length);
+  return index;
+}
 
 var imageList = document.getElementById('images');
+
 //append an image to page via path
 var li = document.createElement('li');
 var img = document.createElement('img');
 
 
-img.setAttribute('src','img/' + 'bag.jpg');
+img.setAttribute('src','img/' + items[randomIndex()].path);
 
 li.appendChild(img);
 imageList.appendChild(li);
