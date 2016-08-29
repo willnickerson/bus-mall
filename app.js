@@ -22,20 +22,33 @@ function loadItems(){
 
 loadItems();
 
+var imageList = document.getElementById('images');
+var oldGroup = [];
+
+//generates 3 distinct items and loads them to page
+function generateItems() {
+  for(var i = 0; i < 3; i++){
+    var index = randomIndex();
+    drawImage(index);
+    oldGroup.push(index);
+    items.splice(index, 1);
+  }
+}
+
+generateItems();
+
+//draws image on page based off of item index
+function drawImage(index) {
+  var li = document.createElement('li');
+  var img = document.createElement('img');
+  //append an image to page via path
+  img.setAttribute('src','img/' + items[index].path);
+  li.appendChild(img);
+  imageList.appendChild(li);
+}
+
 //generates a random item index
 function randomIndex() {
   var index = Math.floor(Math.random() * items.length);
   return index;
 }
-
-var imageList = document.getElementById('images');
-
-//append an image to page via path
-var li = document.createElement('li');
-var img = document.createElement('img');
-
-
-img.setAttribute('src','img/' + items[randomIndex()].path);
-
-li.appendChild(img);
-imageList.appendChild(li);
