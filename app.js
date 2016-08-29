@@ -29,9 +29,12 @@ var oldGroup = [];
 function generateItems() {
   for(var i = 0; i < 3; i++){
     var index = randomIndex();
+    while(oldGroup.indexOf(index) !== -1){
+      index = randomIndex();
+    }
     drawImage(index);
     oldGroup.push(index);
-    items.splice(index, 1);
+    items[index].views += 1;
   }
 }
 
