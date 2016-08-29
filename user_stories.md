@@ -1,4 +1,4 @@
-# User Stories
+# Stories
 
 ## Developer Stories
 
@@ -21,3 +21,13 @@
 - As the start-up we want to create a fun shopping experience for bus riders to make public transportation a more enjoyable experience.
 
 - As the start-up we want to have an effective focus-group app that can be applied to our future business ventures, such as Uber-Mall.
+
+## User Stories
+
+- As a user, I want a streamlined focus group experience so that I do not have to take more time than is needed out of my busy day.
+
+- As a user, I want an engaging focus group experience and do not want to feel like I am being asked the same questions over and over.
+
+- As a user I want the interface that I deal with to be aesthetically pleasing, or else I might as well go take surveys on a better looking website.
+
+- As a user, I want to know that my time serves a purpose and that my opinions are benefiting the world at large.
