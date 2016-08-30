@@ -68,6 +68,17 @@ canvas {
   margin: 0 auto;
 }
 
+.clear {
+  opacity: .3;
+}
+
+ul.clear li img:hover{
+  width: 200px;
+  padding-left: 40px;
+  padding-right: 30px;
+  cursor: default;
+}
+
 .gone {
   display: none;
 }
