@@ -73,6 +73,8 @@ function buttonHandler() {
   renderChart();
   imageList.removeEventListener('click', clickHandler);
   chartButton.removeEventListener('click', buttonHandler);
+  imageList.setAttribute('class', 'clear');
+  chartButton.setAttribute('class', 'gone');
 }
 
 //constructor for item objects
