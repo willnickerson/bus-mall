@@ -30,13 +30,6 @@ imageList.addEventListener('click', clickHandler);
 //event listener for generating chart
 chartButton.addEventListener('click', buttonHandler);
 
-function buttonHandler() {
-  //loading arrays with chart data
-  loadChartArrays();
-  //renders data to chart
-  renderChart();
-}
-
 //logs which image has been clicked and icrements click atrribute, loads three new items
 function clickHandler(e) {
   //getting event target and coercing into string then finding coresponding position in item array.
@@ -57,6 +50,13 @@ function clickHandler(e) {
     // oldGroup.splice(i, 1);
     oldGroup.shift();
   }
+}
+
+function buttonHandler() {
+  //loading arrays with chart data
+  loadChartArrays();
+  //renders data to chart
+  renderChart();
 }
 
 //constructor for item objects
@@ -116,6 +116,8 @@ function randomIndex() {
 //creating chart on page
 function renderChart(){
   var ctx = document.getElementById('my_chart');
+
+  // ctx.textContent = '';
 
   var data = {
     labels: labelsArray,

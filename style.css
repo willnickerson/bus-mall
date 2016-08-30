@@ -8,6 +8,11 @@ h1 {
   font-size: 50px;
 }
 
+h3 {
+  text-align: center;
+  font-size: 15px;
+}
+
 ul {
   list-style-type: none;
   margin-top: 100px;
@@ -28,6 +33,17 @@ img {
 
 button {
   display: block;
-  margin: 50px auto;
+  margin: 15px auto;
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
+  background-color: rgb(255,100,100);
+  color: white;
+  border-width: 0px;
+  font-size: 25px;
+}
 
+canvas {
+  display: block;
+  margin: 0 auto;
 }
