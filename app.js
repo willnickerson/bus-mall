@@ -6,6 +6,9 @@ var pathArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfas
 //this array will be used to store our item objects
 var items = [];
 
+//this will keep track of how many clicks they have logged.
+var pageClicks = 0;
+
 //creating variable for the list of item images
 var imageList = document.getElementById('images');
 
@@ -32,23 +35,33 @@ chartButton.addEventListener('click', buttonHandler);
 
 //logs which image has been clicked and icrements click atrribute, loads three new items
 function clickHandler(e) {
+
   //getting event target and coercing into string then finding coresponding position in item array.
   var click = e.target.getAttribute('src');
   var clickedImage = click.toString().split('/')[1];
   var arrayPosition = pathArray.indexOf(clickedImage);
-  console.log(arrayPosition);
 
-  //incrimenting click value
+  //incrimenting item click value
   items[arrayPosition].clicks += 1;
 
-  //emptying ul and generating 3 new images
-  imageList.textContent = '';
-  generateItems();
+  //incrementing page clicks
+  pageClicks += 1;
 
-  //removing the first 3 elements of the array that keeps track of the images from previous group
-  for(var i = 0; i < 3; i++) {
-    // oldGroup.splice(i, 1);
-    oldGroup.shift();
+  if(pageClicks < 25){
+    //emptying ul and generating 3 new images
+    imageList.textContent = '';
+    generateItems();
+
+    //removing the first 3 elements of the array that keeps track of the images from previous group
+    for(var i = 0; i < 3; i++) {
+      // oldGroup.splice(i, 1);
+      oldGroup.shift();
+    }
+  } else {
+    //let user know they have completed survey
+    alert('Awsome! You\'ve completed the survey.');
+    //this is the equivalent of them hitting submit.
+    buttonHandler();
   }
 }
 
@@ -129,7 +142,7 @@ function renderChart(){
     labels: labelsArray,
     datasets: [
       {
-        label: 'Survey Data',
+        label: 'Clicks Data',
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
