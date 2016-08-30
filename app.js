@@ -55,8 +55,11 @@ function clickHandler(e) {
 function buttonHandler() {
   //loading arrays with chart data
   loadChartArrays();
+  document.getElementById('my_chart').textContent = '';
   //renders data to chart
   renderChart();
+  imageList.removeEventListener('click', clickHandler);
+  chartButton.removeEventListener('click', buttonHandler);
 }
 
 //constructor for item objects
@@ -90,6 +93,9 @@ function loadItems(){
 
 //this loads the arrays with the item data for use in the chart
 function loadChartArrays() {
+  labelsArray = [];
+  clicksArray = [];
+  viewsArray = [];
   for(var i = 0; i < items.length; i++){
     labelsArray.push(items[i].name);
     clicksArray.push(items[i].clicks);
