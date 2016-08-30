@@ -38,7 +38,8 @@ function clickHandler(e) {
 
   //removing the first 3 elements of the array that keeps track of the images from previous group
   for(var i = 0; i < 3; i++) {
-    oldGroup.splice(i, 1);
+    // oldGroup.splice(i, 1);
+    oldGroup.shift();
   }
 }
 
@@ -55,13 +56,14 @@ function Item(path){
 function generateItems() {
   for(var i = 0; i < 3; i++){
     var index = randomIndex();
-    while(oldGroup.indexOf(index) !== -1){
+    while(oldGroup.indexOf(index) !== -1) {
       index = randomIndex();
     }
     drawImage(index);
     oldGroup.push(index);
     items[index].views += 1;
   }
+  console.log(oldGroup);
 }
 
 //loads items array with item objects
