@@ -21,7 +21,13 @@ li {
 
 img {
   width: 200px;
-  padding-left: 30px;
+  padding-left: 40px;
   padding-right: 30px;
   text-align: center;
+}
+
+button {
+  display: block;
+  margin: 50px auto;
+
 }

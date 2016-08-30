@@ -9,13 +9,15 @@ var items = [];
 //creating variable for the list of item images
 var imageList = document.getElementById('images');
 
+var chartButton = document.getElementById('get_chart');
+
 //this array will be used to keep track of the previous 3 images to avoid repeats
 var oldGroup = [];
 
+//these arrays will hold the data and lables for chart
 var labelsArray = [];
 var clicksArray = [];
 var viewsArray = [];
-
 
 //creating and loading our item objects into an array
 loadItems();
@@ -23,14 +25,17 @@ loadItems();
 //randomly selecting three items to display when page loads
 generateItems();
 
-for(var i = 0; i < items.length; i++){
-  labelsArray.push(items[i].name);
-  clicksArray.push(items[i].clicks);
-  viewsArray.push(items[i].views);
-}
-
 //event listener for clicking on item pictures
 imageList.addEventListener('click', clickHandler);
+//event listener for generating chart
+chartButton.addEventListener('click', buttonHandler);
+
+function buttonHandler() {
+  //loading arrays with chart data
+  loadChartArrays();
+  //renders data to chart
+  renderChart();
+}
 
 //logs which image has been clicked and icrements click atrribute, loads three new items
 function clickHandler(e) {
@@ -74,13 +79,21 @@ function generateItems() {
     oldGroup.push(index);
     items[index].views += 1;
   }
-  console.log(oldGroup);
 }
 
 //loads items array with item objects
 function loadItems(){
   for(var i = 0; i < pathArray.length; i++){
     new Item(pathArray[i]);
+  }
+}
+
+//this loads the arrays with the item data for use in the chart
+function loadChartArrays() {
+  for(var i = 0; i < items.length; i++){
+    labelsArray.push(items[i].name);
+    clicksArray.push(items[i].clicks);
+    viewsArray.push(items[i].views);
   }
 }
 
@@ -101,46 +114,77 @@ function randomIndex() {
 }
 
 //creating chart on page
-var ctx = document.getElementById('my_chart');
+function renderChart(){
+  var ctx = document.getElementById('my_chart');
 
-var data = {
-  labels: labelsArray,
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1,
-      data: clicksArray,
-    }
-  ]
-};
+  var data = {
+    labels: labelsArray,
+    datasets: [
+      {
+        label: 'Survey Data',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)'
+        ],
+        borderWidth: 1,
+        data: clicksArray,
+      }
+    ]
+  };
 
-var myBarChart = new Chart(ctx, {
-  type: 'bar',
-  data: data,
-  // options: options
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero:true
-        }
-      }]
+  new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    // options: options
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            stepSize: 1,
+            beginAtZero:true
+          }
+        }]
+      }
     }
-  }
-});
+  });
+}
