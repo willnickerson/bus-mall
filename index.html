@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bus-Mall!</title>
+    <title>Bus-Mall Survey</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
   </head>
   <body>
     <div class="container">
       <h1>Click the item that appeals to you most!</h1>
       <ul id="images">
       </ul>
+      <h3> When you are ready click the button below to submit the survey.</h3>
+      <button type="button" name="button" id="get_chart">Submit!</button>
+      <canvas id="my_chart" width="400" height="200"></canvas>
     </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
