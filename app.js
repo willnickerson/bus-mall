@@ -75,7 +75,7 @@ function clickHandler(e) {
 function buttonHandler() {
   //loading arrays with chart data
   loadChartArrays();
-  document.getElementById('my_chart').textContent = '';
+  document.getElementById('clicks_chart').textContent = '';
   //renders data to chart
   renderChart();
   //the following disables the image click and submit disapears
@@ -149,9 +149,10 @@ function randomIndex() {
 
 //creating chart on page
 function renderChart(){
-  var ctx = document.getElementById('my_chart');
-  // ctx.textContent = '';
-  var data = {
+  var ctxClicks = document.getElementById('clicks_chart');
+
+  //generates chart for views
+  var dataClicks = {
     labels: labelsArray,
     datasets: [
       {
@@ -205,9 +206,82 @@ function renderChart(){
       }
     ]
   };
-  new Chart(ctx, {
+  new Chart(ctxClicks, {
     type: 'bar',
-    data: data,
+    data: dataClicks,
+    // options: options
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            stepSize: 1,
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+
+  //generates chart for views
+  var ctxViews = document.getElementById('views_chart');
+
+  var dataViews = {
+    labels: labelsArray,
+    datasets: [
+      {
+        label: 'Views Data',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)'
+        ],
+        borderWidth: 1,
+        data: viewsArray,
+      }
+    ]
+  };
+  new Chart(ctxViews, {
+    type: 'bar',
+    data: dataViews,
     // options: options
     options: {
       scales: {
