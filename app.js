@@ -76,6 +76,11 @@ function buttonHandler() {
   chartButton.removeEventListener('click', buttonHandler);
   imageList.setAttribute('class', 'clear');
   chartButton.setAttribute('class', 'gone');
+
+  //below save arrays to local storage
+  var jsonString = JSON.stringify(items);
+  console.log(jsonString);
+  localStorage.setItem('jsonString', jsonString);
 }
 
 //constructor for item objects
