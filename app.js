@@ -22,6 +22,7 @@ var oldGroup = [];
 var labelsArray = [];
 var clicksArray = [];
 var viewsArray = [];
+var clicksPerViewArray = [];
 
 //this first control flow decides on whether or not to intanciate new item objects or load locally stored item objects
 if(localStorage.length === 0){
@@ -44,31 +45,36 @@ chartButton.addEventListener('click', buttonHandler);
 //logs which image has been clicked and icrements click atrribute, loads three new items
 function clickHandler(e) {
 
-  //getting event target and coercing into string then finding coresponding position in item array.
+  //getting event target and making sure it is an image
   var click = e.target.getAttribute('src');
-  var clickedImage = click.toString().split('/')[1];
-  var arrayPosition = pathArray.indexOf(clickedImage);
-
-  //incrimenting item click value
-  items[arrayPosition].clicks += 1;
-
-  //incrementing page clicks
-  pageClicks += 1;
-
-  if(pageClicks < 25){
-    //emptying ul and generating 3 new images
-    imageList.textContent = '';
-    generateItems();
-
-    //removing the first 3 elements of the array that keeps track of the images from previous group
-    for(var i = 0; i < 3; i++) {
-      oldGroup.shift();
-    }
+  if(click === null){
+    alert('Make sure you are clicking on an image!');
   } else {
-    //let user know they have completed survey
-    alert('Awsome! You\'ve completed the survey.');
-    //this is the equivalent of them hitting submit.
-    buttonHandler();
+    //coercing  target into string then finding coresponding position in item array.
+    var clickedImage = click.toString().split('/')[1];
+    var arrayPosition = pathArray.indexOf(clickedImage);
+
+    //incrimenting item click value
+    items[arrayPosition].clicks += 1;
+
+    //incrementing page clicks
+    pageClicks += 1;
+
+    if(pageClicks < 25){
+      //emptying ul and generating 3 new images
+      imageList.textContent = '';
+      generateItems();
+
+      //removing the first 3 elements of the array that keeps track of the images from previous group
+      for(var i = 0; i < 3; i++) {
+        oldGroup.shift();
+      }
+    } else {
+      //let user know they have completed survey
+      alert('Awsome! You\'ve completed the survey.');
+      //this is the equivalent of them hitting submit.
+      buttonHandler();
+    }
   }
 }
 
@@ -124,10 +130,12 @@ function loadChartArrays() {
   labelsArray = [];
   clicksArray = [];
   viewsArray = [];
+  clicksPerViewArray = [];
   for(var i = 0; i < items.length; i++){
     labelsArray.push(items[i].name);
     clicksArray.push(items[i].clicks);
     viewsArray.push(items[i].views);
+    clicksPerViewArray.push(items[i].clicks / items[i].views);
   }
 }
 
@@ -288,6 +296,79 @@ function renderChart(){
         yAxes: [{
           ticks: {
             stepSize: 1,
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+
+  //generates chart for clicks per view
+  var ctxClicksPerView = document.getElementById('clicks_per_view_chart');
+
+  var dataClicksPerView = {
+    labels: labelsArray,
+    datasets: [
+      {
+        label: 'Clicks Per View Data',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)'
+        ],
+        borderWidth: 1,
+        data: clicksPerViewArray,
+      }
+    ]
+  };
+  new Chart(ctxClicksPerView, {
+    type: 'bar',
+    data: dataClicksPerView,
+    // options: options
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            stepSize: 0.1,
             beginAtZero:true
           }
         }]
