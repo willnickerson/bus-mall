@@ -1,7 +1,7 @@
 'use strict';
 
 //array of all paths for image files of the items
-var pathArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
+var pathArray = ['bag.png', 'banana.png', 'bathroom.png', 'boots.png', 'breakfast.png', 'bubblegum.png', 'chair.png', 'cthulhu.png', 'dog-duck.png', 'dragon.png', 'pen.png', 'pet-sweep.png', 'scissors.png', 'shark.png', 'sweep.png', 'tauntaun.png', 'unicorn.png', 'usb.png', 'water-can.png', 'wine-glass.png'];
 
 //this array will be used to store our item objects
 var items;
