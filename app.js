@@ -4,7 +4,7 @@
 var pathArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 //this array will be used to store our item objects
-var items = [];
+var items;
 
 //this will keep track of how many clicks the user has logged.
 var pageClicks = 0;
@@ -23,9 +23,16 @@ var labelsArray = [];
 var clicksArray = [];
 var viewsArray = [];
 
-//creating and loading our item objects into an array
-loadItems();
-
+//this first control flow decides on whether or not to intanciate new item objects or load locally stored item objects
+if(localStorage.length === 0){
+  //creating and loading new item objects into an items array
+  items = [];
+  loadItems();
+} else {
+  //retrieving locally stored item object array
+  var retrieveItems = localStorage.getItem('itemsString');
+  items = JSON.parse(retrieveItems);
+}
 //randomly selecting three items to display when page loads
 generateItems();
 
@@ -77,10 +84,10 @@ function buttonHandler() {
   imageList.setAttribute('class', 'clear');
   chartButton.setAttribute('class', 'gone');
 
-  //below save arrays to local storage
-  var jsonString = JSON.stringify(items);
-  console.log(jsonString);
-  localStorage.setItem('jsonString', jsonString);
+  //saves items arrays to local storage after submit.
+  var itemsString = JSON.stringify(items);
+  console.log(itemsString);
+  localStorage.setItem('itemsString', itemsString);
 }
 
 //constructor for item objects
