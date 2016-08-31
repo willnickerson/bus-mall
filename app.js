@@ -6,12 +6,13 @@ var pathArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfas
 //this array will be used to store our item objects
 var items = [];
 
-//this will keep track of how many clicks they have logged.
+//this will keep track of how many clicks the user has logged.
 var pageClicks = 0;
 
 //creating variable for the list of item images
 var imageList = document.getElementById('images');
 
+//creating variable for the submit button
 var chartButton = document.getElementById('get_chart');
 
 //this array will be used to keep track of the previous 3 images to avoid repeats
@@ -54,7 +55,6 @@ function clickHandler(e) {
 
     //removing the first 3 elements of the array that keeps track of the images from previous group
     for(var i = 0; i < 3; i++) {
-      // oldGroup.splice(i, 1);
       oldGroup.shift();
     }
   } else {
@@ -71,6 +71,7 @@ function buttonHandler() {
   document.getElementById('my_chart').textContent = '';
   //renders data to chart
   renderChart();
+  //the following disables the image click and submit disapears
   imageList.removeEventListener('click', clickHandler);
   chartButton.removeEventListener('click', buttonHandler);
   imageList.setAttribute('class', 'clear');
@@ -137,9 +138,7 @@ function randomIndex() {
 //creating chart on page
 function renderChart(){
   var ctx = document.getElementById('my_chart');
-
   // ctx.textContent = '';
-
   var data = {
     labels: labelsArray,
     datasets: [
@@ -194,7 +193,6 @@ function renderChart(){
       }
     ]
   };
-
   new Chart(ctx, {
     type: 'bar',
     data: data,
