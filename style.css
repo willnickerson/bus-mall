@@ -45,6 +45,7 @@ img {
   padding-right: 20px;
   margin-bottom: 20px;
   text-align: center;
+  transition: 350ms;
 }
 
 img:hover {
@@ -54,10 +55,10 @@ img:hover {
   padding-right: 15px;
   padding-left: 15px;
   margin-bottom: 10px;
-}
-
-button:hover {
-  cursor: pointer;
+  /*-webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.4));
+  filter: url(#drop-shadow);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+  filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";*/
 }
 
 button {
@@ -70,6 +71,12 @@ button {
   color: white;
   border-width: 0px;
   font-size: 25px;
+  transition: 350ms;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(120,120,255);
 }
 
 canvas {
