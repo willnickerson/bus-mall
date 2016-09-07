@@ -3,8 +3,8 @@
 //array of all paths for image files of the items
 var pathArray = ['bag.png', 'banana.png', 'bathroom.png', 'boots.png', 'breakfast.png', 'bubblegum.png', 'chair.png', 'cthulhu.png', 'dog-duck.png', 'dragon.png', 'pen.png', 'pet-sweep.png', 'scissors.png', 'shark.png', 'sweep.png', 'tauntaun.png', 'unicorn.png', 'usb.png', 'water-can.png', 'wine-glass.png'];
 
-//this array will be used to store our item objects
-var items;
+//this is the array of our item objects we will check later if it is empty or there is data stored
+var items = localStorage.getItem('itemsString');
 
 //this will keep track of how many clicks the user has logged.
 var pageClicks = 0;
@@ -25,15 +25,15 @@ var viewsArray = [];
 var clicksPerViewArray = [];
 
 //this first control flow decides on whether or not to intanciate new item objects or load locally stored item objects
-if(localStorage.length === 0){
+if(!items){
   //creating and loading new item objects into an items array
   items = [];
   loadItems();
 } else {
-  //retrieving locally stored item object array
-  var retrieveItems = localStorage.getItem('itemsString');
-  items = JSON.parse(retrieveItems);
+  //retrieving locally stored item object array and pasring into array of objects
+  items = JSON.parse(items);
 }
+
 //randomly selecting three items to display when page loads
 generateItems();
 
@@ -92,7 +92,6 @@ function buttonHandler() {
 
   //saves items arrays to local storage after submit.
   var itemsString = JSON.stringify(items);
-  console.log(itemsString);
   localStorage.setItem('itemsString', itemsString);
 }
 
